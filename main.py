@@ -1114,6 +1114,8 @@ asyncio.run(main())
 # ==========================================================
 # 8. 終了処理
 # ==========================================================
-atexit.register(on_exit)
-pygame.quit()
-sys.exit()
+if not WEB:
+    # PC版だけ: ブラウザ版では asyncio.run が待たずに戻るので、ここで終了処理をしてはいけない
+    atexit.register(on_exit)
+    pygame.quit()
+    sys.exit()
